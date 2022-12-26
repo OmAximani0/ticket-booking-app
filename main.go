@@ -12,7 +12,7 @@ func main() {
 	bookings := []string{}
 
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
-	fmt.Printf("We have total of %v tickets and %v are still avainlable\n", conferenceTicket, remainingTickets)
+	fmt.Printf("We have total of %v tickets and %v are still available\n", conferenceTicket, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
 	for {
@@ -33,6 +33,11 @@ func main() {
 		fmt.Println("Enter number of tickets: ")
 		fmt.Scanln(&userTickets)
 
+		if userTickets > remainingTickets {
+			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets.\n", remainingTickets, userTickets)
+			continue
+		}
+
 		remainingTickets = remainingTickets - userTickets
 		bookings = append(bookings, firstName+" "+lastName)
 
@@ -45,6 +50,11 @@ func main() {
 		}
 
 		fmt.Printf("Thefirst names of bookings are: %v\n", firstNames)
+
+		if remainingTickets == 0 {
+			fmt.Println("Our conference is booked out. Come back next year.")
+			break
+		}
 	}
 
 }
